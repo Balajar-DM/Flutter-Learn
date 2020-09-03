@@ -8,9 +8,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Flutter"),
+          title: Text("Latihan TextStyle"),
         ),
-        body: Center(child: Text("Belajar Fluter")),
+        body: Center(
+          child: Text(
+            "Ini adalah Text",
+            style: TextStyle(
+                fontFamily: "AeroviasBrasilNF",
+                fontSize: 30,
+                decoration: TextDecoration.overline,
+                decorationColor: Colors.red,
+                decorationThickness: 5,
+                decorationStyle: TextDecorationStyle.wavy),
+          ),
+        ),
       ),
     );
   }
