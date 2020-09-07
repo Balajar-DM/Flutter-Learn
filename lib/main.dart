@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Dragable"),
+          title: Text("Latihan Draggable"),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
