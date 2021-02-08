@@ -7,10 +7,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Latihan Flutter"),
+        backgroundColor: Colors.blueAccent,
+        body: Container(
+          margin: EdgeInsets.all(10),
+          child: ListView(
+            children: <Widget>[
+              buildCard(Icons.account_box, "Account Box"),
+              buildCard(Icons.adb, "Bug Android"),
+            ],
+          ),
         ),
-        body: Center(child: Text("Belajar Fluter")),
+      ),
+    );
+  }
+
+  Card buildCard(IconData iconData, String text) {
+    return Card(
+      elevation: 5,
+      child: Row(
+        children: <Widget>[
+          Container(
+              margin: EdgeInsets.all(5),
+              child: Icon(
+                iconData,
+                color: Colors.blueAccent,
+              )),
+          Text(text),
+        ],
       ),
     );
   }
