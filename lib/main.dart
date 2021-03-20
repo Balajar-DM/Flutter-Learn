@@ -156,10 +156,9 @@ class MyApp extends StatelessWidget {
             //Button
             Align(
               alignment: Alignment(0.9, 0.9),
-              child: RaisedButton(
-                child: Text("My Button"),
-                color: Colors.amber,
+              child: ElevatedButton(
                 onPressed: () {},
+                child: Text("My Button"),
               ),
             ),
           ],
