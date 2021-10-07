@@ -8,18 +8,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Latihan QR Code Flutter"),
-        ),
         body: Center(
           child: QrImage(
             version: 6,
-            //backgroundColor: Colors.grey,
-            foregroundColor: Colors.black,
             errorCorrectionLevel: QrErrorCorrectLevel.M,
-            padding: EdgeInsets.all(0),
+            padding: EdgeInsets.all(30),
             size: 300,
-            data: "https://dion.pw/nota",
+            data: "https://boost.cleverlabs.id/",
           ),
         ),
       ),
