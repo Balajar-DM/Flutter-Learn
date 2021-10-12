@@ -1,35 +1,26 @@
-import 'dart:async';
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
-Future<Album> createAlbum(String title) async {
-  final response = await http.post(
-    Uri.https('jsonplaceholder.typicode.com', 'albums'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(<String, String>{
-      'title': title,
-    }),
-  );
+class PostResult {
+  String id;
+  String name;
+  String job;
+  String created;
 
-  if (response.statusCode == 201) {
-    return Album.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Failed to create album.');
+  PostResult({this.id, this.name, this.job, this.created});
+  factory PostResult.createPostResult(Map<String, dynamic> object) {
+    return PostResult(
+        name: object['name'],
+        job: object['job'],
+        id: object['id'],
+        created: object['createdAt']);
   }
-}
 
-class Album {
-  final int id;
-  final String title;
-
-  Album({this.id, this.title});
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      id: json['id'],
-      title: json['title'],
-    );
+  static Future<PostResult> connectToAPI(String name, String job) async {
+    String apiURL = "https://reqres.in/api/users";
+    var apiResult = await http.post(apiURL, body: {"name": name, "job": job});
+    var jsonObject = json.decode(apiResult.body);
+    return PostResult.createPostResult(jsonObject);
   }
 }

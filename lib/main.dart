@@ -15,9 +15,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final TextEditingController _controller = TextEditingController();
-  Future<Album> _futureAlbum;
-
+  PostResult postResult = null;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,41 +25,32 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Create Data Example'),
+          title: Text('API Demo'),
         ),
-        body: Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(8.0),
-          child: (_futureAlbum == null)
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    TextField(
-                      controller: _controller,
-                      decoration: InputDecoration(hintText: 'Enter Title'),
-                    ),
-                    ElevatedButton(
-                      child: Text('Create Data'),
-                      onPressed: () {
-                        setState(() {
-                          _futureAlbum = createAlbum(_controller.text);
-                        });
-                      },
-                    ),
-                  ],
-                )
-              : FutureBuilder<Album>(
-                  future: _futureAlbum,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Text(snapshot.data.title);
-                    } else if (snapshot.hasError) {
-                      return Text("${snapshot.error}");
-                    }
-
-                    return CircularProgressIndicator();
-                  },
-                ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text((postResult != null)
+                  ? postResult.name +
+                      " | " +
+                      postResult.job +
+                      " | " +
+                      postResult.id +
+                      " | " +
+                      postResult.created
+                  : "Tidak ada data"),
+              RaisedButton(
+                onPressed: () {
+                  PostResult.connectToAPI("Baidu", "Dokter").then((value) {
+                    postResult = value;
+                    setState(() {});
+                  });
+                },
+                child: Text("POST"),
+              )
+            ],
+          ),
         ),
       ),
     );
