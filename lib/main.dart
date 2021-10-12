@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -21,33 +19,31 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  String judul = "Hasil QR Code";
+  String text = 'Hasil QR Scan';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("QR Scan"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              judul,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                judul = await scanner.scan();
-                setState(() {});
-              },
-              child: Text("Scan QR"),
-            ),
-          ],
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Latihan Buat Scanner QrCode di Flutter"),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Hasil QR Scan'),
+              SizedBox(
+                height: 20,
+              ),
+              RaisedButton(
+                  child: Text('Scan'),
+                  onPressed: () async {
+                    text = await scanner.scan();
+                    setState(() {});
+                  })
+            ],
+          ),
         ),
       ),
     );
