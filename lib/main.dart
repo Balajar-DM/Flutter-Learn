@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learn/post_result_model.dart';
+import 'package:learn/user_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,39 +17,47 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   PostResult postResult = null;
+  User user = null;
+  String output = "no data";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Create Data Example',
+      title: 'API Example',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('API Demo'),
+          title: Text('API Demo Example'),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text((postResult != null)
-                  ? postResult.name +
-                      " | " +
-                      postResult.job +
-                      " | " +
-                      postResult.id +
-                      " | " +
-                      postResult.created
+              Text((user != null)
+                  ? user.id + " | " + user.name
                   : "Tidak ada data"),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
-                  PostResult.connectToAPI("Baidu", "Dokter").then((value) {
-                    postResult = value;
+                  User.connectToAPI("2").then((value) {
+                    user = value;
                     setState(() {});
                   });
                 },
-                child: Text("POST"),
-              )
+                child: Text("GET BY ID"),
+              ),
+              Text(output),
+              ElevatedButton(
+                onPressed: () {
+                  User.getUsers("1").then((users) {
+                    output = "";
+                    for (int i = 0; i < users.length; i++)
+                      output = output + " [ " + users[i].name + " ] ";
+                    setState(() {});
+                  });
+                },
+                child: Text("GET ALL"),
+              ),
             ],
           ),
         ),

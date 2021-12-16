@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 class PostResult {
@@ -11,10 +10,11 @@ class PostResult {
   PostResult({this.id, this.name, this.job, this.created});
   factory PostResult.createPostResult(Map<String, dynamic> object) {
     return PostResult(
-        name: object['name'],
-        job: object['job'],
-        id: object['id'],
-        created: object['createdAt']);
+      name: object['name'],
+      job: object['job'],
+      id: object['id'],
+      created: object['createdAt'],
+    );
   }
 
   static Future<PostResult> connectToAPI(String name, String job) async {
